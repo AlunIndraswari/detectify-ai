@@ -1,0 +1,396 @@
+/* ============================================= */
+/* == NAVBAR STYLES                             == */
+/* ============================================= */
+.main-header {
+  background-color: #ffffff;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  padding: 0 5%;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 1000;
+}
+
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  height: 65px;
+}
+
+.nav-logo {
+  color: #1e3a8a;
+  font-weight: 600;
+  font-size: 1.5rem;
+  text-decoration: none;
+}
+
+.nav-menu {
+  display: flex;
+  list-style: none;
+  gap: 30px;
+}
+
+.nav-link {
+  color: #333;
+  text-decoration: none;
+  font-size: 1rem;
+  font-weight: 500;
+  transition: color 0.3s ease;
+}
+
+.nav-link:hover {
+  color: #3b82f6;
+}
+
+/* Add padding to the body to prevent content from hiding behind the fixed navbar */
+body {
+  padding-top: 65px; /* Same as navbar height */
+}
+
+/* ============================================= */
+/* == STYLES GLOBAL & FONT                      == */
+/* ============================================= */
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: 'Poppins', sans-serif; /* Menggunakan Poppins sebagai default */
+  min-height: 100vh;
+  overflow-x: hidden;
+}
+
+/* ============================================= */
+/* == HALAMAN INDEX (templates/index.html)      == */
+/* ============================================= */
+
+/* Gunakan ID unik untuk body atau container utama untuk menghindari konflik */
+#page-index {
+  font-family: 'Roboto', sans-serif;
+  background-size: cover;
+  background-position: center;
+  color: white;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+}
+
+#page-index .container {
+  background-color: rgba(0, 0, 0, 0.5);
+  padding: 40px 60px;
+  border-radius: 10px;
+  max-width: 600px;
+}
+
+#page-index h1 {
+  font-size: 3rem;
+  margin-bottom: 1rem;
+}
+
+#page-index p {
+  font-size: 1.5rem;
+  margin-bottom: 2rem;
+}
+
+#page-index .btn {
+  display: inline-block;
+  background-color: #4A90E2;
+  color: white;
+  padding: 10px 20px;
+  border-radius: 5px;
+  font-size: 1.2rem;
+  cursor: pointer;
+  text-decoration: none;
+  transition: background 0.3s;
+}
+
+#page-index .btn:hover {
+  background-color: #357ABD;
+}
+
+
+/* ============================================= */
+/* == HALAMAN UPLOAD (templates/upload.html)    == */
+/* ============================================= */
+
+#page-upload {
+  background: #e0e5ec;
+  display: flex;
+  flex-direction: column; 
+}
+
+#page-upload .main-container {
+  display: flex;
+  flex-direction: row; 
+  width: 100%;
+  flex-grow: 1; 
+}
+
+#page-upload .left-panel {
+  width: 100%;
+  background: #1e3a8a;
+  color: white;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 40px;
+  text-align: center;
+}
+
+#page-upload .left-panel h1 {
+  font-size: 2.5rem;
+  margin-bottom: 20px;
+}
+
+#page-upload .left-panel p {
+  font-size: 1rem;
+  line-height: 1.6;
+  max-width: 90%;
+  min-height: 100px;
+}
+
+#page-upload .right-panel {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 30px;
+  background: #e0e5ec;
+}
+
+#page-upload .card {
+  background: #e0e5ec;
+  padding: 30px;
+  border-radius: 25px;
+  box-shadow: 10px 10px 30px #bebebe, -10px -10px 30px #ffffff;
+  width: 100%;
+  max-width: 400px;
+  text-align: center;
+}
+
+#page-upload .card h2 {
+  margin-bottom: 15px;
+  font-size: 1.5rem;
+  color: #1e293b;
+}
+
+#page-upload .upload-box {
+  border: 2px dashed #3b82f6;
+  border-radius: 15px;
+  padding: 25px;
+  margin: 20px 0;
+  background-color: #f0f4f8;
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+#page-upload .upload-box:hover {
+    background-color: #e6eaf0;
+}
+
+#page-upload .upload-box p {
+  margin: 8px 0;
+  color: #555;
+}
+
+#page-upload .buttons {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin-top: 20px;
+  width: 100%;
+}
+
+#page-upload .upload-box .buttons button, 
+#page-upload .card > .buttons button {
+  background-color: #3b82f6;
+  color: white;
+  border: none;
+  padding: 12px 25px; 
+  border-radius: 10px;
+  font-size: 0.95rem; 
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  box-shadow: 5px 5px 10px #bebebe, -5px -5px 10px #ffffff; 
+  width: auto;
+  min-width: 150px; 
+  display: inline-block;
+}
+
+#page-upload .card > .buttons button {
+    padding: 14px 28px;
+    font-size: 1rem;
+}
+
+
+#page-upload .upload-box .buttons button:hover,
+#page-upload .card > .buttons button:hover {
+  background-color: #2563eb;
+}
+
+#page-upload .upload-box .buttons button:active,
+#page-upload .card > .buttons button:active {
+    box-shadow: inset 5px 5px 10px #bebebe, inset -5px -5px 10px #ffffff;
+}
+
+#page-upload .preview-image {
+  margin-bottom: 15px; 
+  max-width: 100%;
+  max-height: 180px; 
+  border-radius: 12px;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+  object-fit: contain; 
+  display: none; 
+}
+
+#page-upload #loadingIndicator, 
+#page-upload #errorMessageContainer {
+    margin-top: 15px;
+    font-weight: 600;
+}
+
+#page-upload #loadingIndicator { color: #3b82f6; }
+#page-upload #errorMessageContainer p { color: red; font-size: 0.9rem; margin-top: 5px; }
+
+@media (min-width: 900px) {
+  #page-upload { flex-direction: row; }
+  #page-upload .left-panel { width: 50%; height: 100vh; align-items: flex-start; text-align: left; padding: 60px; }
+  #page-upload .left-panel h1 { font-size: 3rem; }
+  #page-upload .left-panel p { font-size: 1.1rem; min-height: 120px; }
+  #page-upload .right-panel { width: 50%; height: 100vh; }
+}
+
+
+#page-upload #loadingIndicator, 
+#page-upload #errorMessageContainer {
+    margin-top: 15px;
+    font-weight: 600;
+}
+
+#page-upload #loadingIndicator { color: #3b82f6; }
+
+/* ATURAN CSS BARU UNTUK PESAN ERROR */
+#page-upload #errorMessageContainer p { 
+    color: #ef4444; /* Merah yang tegas */
+    font-size: 0.9rem; 
+    margin-top: 5px; 
+    line-height: 1.5; /* Spasi antar baris jika pesan error panjang */
+    background-color: #fee2e2; /* Latar belakang merah muda */
+    border: 1px solid #fca5a5; /* Border merah */
+    border-radius: 8px;
+    padding: 10px;
+}
+
+/* ============================================= */
+/* == HALAMAN RESULT (templates/result.html)    == */
+/* ============================================= */
+
+#page-result {
+  background: #f1f5f9;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: #333;
+}
+
+#page-result .container {
+  background: white;
+  padding: 30px 40px;
+  border-radius: 20px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+  text-align: center;
+  width: 450px;
+  max-width: 95%;
+}
+
+#page-result h1 {
+  font-size: 26px;
+  color: #1e293b;
+  margin-bottom: 25px;
+}
+
+#page-result .result-image-container { margin-bottom: 20px; }
+#page-result .result-image { max-width: 100%; max-height: 200px; border-radius: 10px; border: 1px solid #e2e8f0; object-fit: contain; display: block; margin-left: auto; margin-right: auto;}
+#page-result .no-image-placeholder { width: 100%; height: 150px; background-color: #e2e8f0; border-radius: 10px; display: flex; align-items: center; justify-content: center; color: #64748b; font-style: italic; }
+#page-result .result-label { font-size: 22px; font-weight: 600; color: #0f172a; margin-bottom: 10px; min-height: 30px; }
+#page-result .confidence-label { color: #64748b; font-size: 14px; margin-bottom: 8px; }
+
+#page-result .progress {
+  width: 100%;
+  height: 18px;
+  background: #e2e8f0;
+  border-radius: 10px;
+  overflow: hidden;
+  margin-bottom: 15px;
+}
+
+#page-result .progress-bar {
+  height: 100%;
+  transition: width 0.6s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  font-size: 0.8em;
+}
+
+#page-result .percent { font-size: 20px; font-weight: bold; color: #1e293b; margin-bottom: 25px; }
+#page-result .btn-back { display: inline-block; background-color: #3b82f6; color: white; padding: 10px 20px; border-radius: 8px; font-size: 1rem; text-decoration: none; transition: background-color 0.3s ease; margin-top: 15px; }
+#page-result .btn-back:hover { background-color: #2563eb; }
+
+/* ============================================= */
+/* == HALAMAN RESULT (Tambahan untuk Tombol Share) == */
+/* ============================================= */
+
+#page-result .share-container {
+  margin-top: 30px;
+  border-top: 1px solid #e2e8f0;
+  padding-top: 25px;
+}
+
+#page-result .share-container h3 {
+  font-size: 1rem;
+  color: #475569;
+  margin-bottom: 15px;
+  font-weight: 600;
+}
+
+#page-result .share-buttons {
+  display: flex;
+  justify-content: center;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+#page-result .share-btn {
+  padding: 8px 15px;
+  border: none;
+  border-radius: 6px;
+  color: white;
+  font-size: 0.9rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: opacity 0.3s;
+  min-width: 100px;
+}
+
+#page-result .share-btn:hover {
+  opacity: 0.85;
+}
+
+#page-result .share-btn { background-color: #334155; } /* Tombol Salin Tautan */
+#page-result .share-btn.twitter { background-color: #1DA1F2; }
+#page-result .share-btn.facebook { background-color: #1877F2; }
+#page-result .share-btn.whatsapp { background-color: #25D366; }

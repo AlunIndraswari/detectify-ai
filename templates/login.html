@@ -1,0 +1,53 @@
+{% extends "base.html" %}
+
+{% block styles %}
+<!-- Tidak ada style khusus untuk halaman ini, menggunakan Bootstrap dari base.html -->
+{% endblock %}
+
+{% block content %}
+<div class="container" style="max-width: 500px; margin-top: 50px; margin-bottom: 50px;">
+    <!-- Flash Messages -->
+    <div class="row">
+        <div class="col-md-12">
+            {% with messages = get_flashed_messages(with_categories=true) %}
+              {% if messages %}
+                {% for category, message in messages %}
+                  <div class="alert alert-{{ category }} alert-dismissible fade show" role="alert">
+                    {{ message }}
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                  </div>
+                {% endfor %}
+              {% endif %}
+            {% endwith %}
+        </div>
+    </div>
+
+    <div class="card p-4">
+        <form method="POST" action="">
+            <fieldset class="form-group">
+                <legend class="border-bottom mb-4">Login</legend>
+                <div class="mb-3">
+                    <label for="email" class="form-label">Alamat Email</label>
+                    <input type="email" class="form-control" id="email" name="email" required>
+                </div>
+                <div class="mb-3">
+                    <label for="password" class="form-label">Password</label>
+                    <input type="password" class="form-control" id="password" name="password" required>
+                </div>
+            </fieldset>
+            <div class="form-group">
+                <button class="btn btn-primary" type="submit">Login</button>
+            </div>
+        </form>
+    </div>
+    <div class="border-top pt-3 mt-3">
+        <small class="text-muted">
+            Belum Punya Akun? <a class="ms-2" href="{{ url_for('register') }}">Daftar Sekarang</a>
+        </small>
+    </div>
+</div>
+{% endblock %}
+
+{% block scripts %}
+<!-- Tidak ada script khusus untuk halaman ini -->
+{% endblock %}

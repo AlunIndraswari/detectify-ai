@@ -1,0 +1,80 @@
+{% extends "base.html" %}
+
+{% block title %}Hasil Analisis{% endblock %}
+
+{% block styles %}
+    <!-- REVISI: Memuat style.css secara eksplisit di sini -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <style>
+        #page-result { min-height: calc(100vh - 65px); }
+        .btn-secondary { background-color: #6c757d; border-color: #6c757d; }
+        .btn-secondary:hover { background-color: #5a6268; border-color: #545b62; }
+    </style>
+{% endblock %}
+
+{% block content %}
+<body id="page-result">
+  <div class="container">
+    <h1>Hasil Analisis</h1>
+    <div class="result-image-container">
+        <!-- REVISI: Menggunakan rute 'serve_image' dan path lengkap dari database -->
+        <img id="analyzedImage" class="result-image" src="{{ url_for('serve_image', filepath=prediction.image_path) }}" alt="Gambar Dianalisis"/>
+    </div>
+    <p id="resultLabel" class="result-label">Mendeteksi...</p>
+    <p class="confidence-label">Tingkat Keyakinan</p>
+    <div class="progress">
+      <div id="progressBar" class="progress-bar"></div>
+    </div>
+    <p id="percentText" class="percent">0%</p>
+    <a href="{{ url_for('upload_page') }}" class="btn-back">Coba Lagi</a>
+
+    <div class="share-container">
+        <h3>Bagikan Hasil</h3>
+        <div class="share-buttons">
+            <button id="copyLinkBtn" class="share-btn">Salin Tautan</button>
+            <button id="shareTwitterBtn" class="share-btn twitter">Twitter</button>
+            <button id="shareFacebookBtn" class="share-btn facebook">Facebook</button>
+            <button id="shareWhatsappBtn" class="share-btn whatsapp">WhatsApp</button>
+        </div>
+    </div>
+
+    {% if current_user.is_authenticated and current_user == prediction.author and prediction.feedback_label is none %}
+    <div id="feedbackContainer" class="share-container">
+        <h3>Hasilnya salah?</h3>
+        <p><small>Bantu kami meningkatkan akurasi model dengan masukan Anda.</small></p>
+        <div class="share-buttons">
+            <button id="feedbackBtnAi" class="share-btn btn-secondary" 
+                    data-prediction-id="{{ prediction.id }}" 
+                    data-correct-label="AiArtData">
+                Ini Sebenarnya AI
+            </button>
+            <button id="feedbackBtnReal" class="share-btn btn-secondary"
+                    data-prediction-id="{{ prediction.id }}"
+                    data-correct-label="RealArt">
+                Ini Sebenarnya Asli
+            </button>
+        </div>
+        <div id="feedbackMessage" class="mt-3" style="display: none;"></div>
+    </div>
+    {% elif prediction.feedback_label is not none %}
+    <div class="share-container">
+        <div class="alert alert-success mt-3">
+            Terima kasih, Anda sudah memberikan masukan untuk hasil ini.
+        </div>
+    </div>
+    {% endif %}
+
+  </div>
+</body>
+{% endblock %}
+
+{% block scripts %}
+  <script>
+    const predictionData = {
+      label: "{{ prediction.predicted_label }}",
+      confidence: {{ prediction.confidence or 0 }},
+      pageUrl: "{{ url_for('show_result', prediction_id=prediction.id, _external=True) }}"
+    };
+  </script>
+  <script src="{{ url_for('static', filename='js/result.js') }}"></script>
+{% endblock %}

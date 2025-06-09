@@ -1,0 +1,63 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="container mt-5 mb-5">
+    <h1 class="mb-4">Verifikasi Masukan Pengguna</h1>
+
+    {% with messages = get_flashed_messages(with_categories=true) %}
+      {% if messages %}
+        {% for category, message in messages %}
+          <div class="alert alert-{{ category }} alert-dismissible fade show" role="alert">
+            {{ message }}
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+          </div>
+        {% endfor %}
+      {% endif %}
+    {% endwith %}
+
+    {% if predictions %}
+    <div class="table-responsive">
+        <table class="table table-bordered table-hover align-middle">
+            <thead class="table-light">
+                <tr>
+                    <th>Gambar</th>
+                    <th>Prediksi Sistem</th>
+                    <th class="table-info">Masukan Pengguna</th>
+                    <th>Pengguna</th>
+                    <th>Waktu</th>
+                    <th>Aksi</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for p in predictions %}
+                <tr>
+                    <td>
+                        <!-- REVISI: Menggunakan rute 'serve_image' dan path lengkap dari database -->
+                        <a href="{{ url_for('serve_image', filepath=p.image_path) }}" target="_blank">
+                            <img src="{{ url_for('serve_image', filepath=p.image_path) }}" alt="Thumbnail" width="100" class="img-thumbnail">
+                        </a>
+                    </td>
+                    <td>{{ p.predicted_label }} ({{ p.confidence }}%)</td>
+                    <td class="fw-bold table-info">{{ p.feedback_label }}</td>
+                    <td>{{ p.author.username if p.author else 'N/A' }}</td>
+                    <td>{{ p.feedback_timestamp.strftime('%d-%m-%Y %H:%M') }}</td>
+                    <td>
+                        <form action="{{ url_for('process_feedback', prediction_id=p.id) }}" method="POST" class="d-inline">
+                            <button type="submit" name="action" value="confirm" class="btn btn-success btn-sm">Konfirmasi</button>
+                        </form>
+                        <form action="{{ url_for('process_feedback', prediction_id=p.id) }}" method="POST" class="d-inline mt-1">
+                            <button type="submit" name="action" value="reject" class="btn btn-danger btn-sm">Tolak</button>
+                        </form>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+    {% else %}
+    <div class="alert alert-info">
+        Tidak ada masukan yang perlu diverifikasi saat ini.
+    </div>
+    {% endif %}
+</div>
+{% endblock %}

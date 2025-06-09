@@ -1,0 +1,74 @@
+{% extends "base.html" %}
+
+{% block title %}Home - Detectify AI{% endblock %}
+
+{% block styles %}
+    <style>
+      /* Hapus padding atas dari body khusus untuk halaman ini */
+      body {
+        padding-top: 0;
+      }
+
+      /* Atur #page-index untuk menjadi kontainer layar penuh */
+      #page-index {
+        background-image: url("{{ url_for('static', filename='images/background-index.jpg') }}");
+        background-size: cover;
+        background-position: center;
+        height: 100vh; /* <-- KUNCI UTAMA: Tinggi 100% dari viewport */
+        color: white;
+
+        /* Gunakan flexbox untuk memusatkan konten di dalamnya secara sempurna */
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        text-align: center;
+      }
+
+      /* Ini adalah kotak semi-transparan yang membungkus teks */
+      #page-index .container {
+        background-color: rgba(0, 0, 0, 0.6);
+        padding: 40px 60px;
+        border-radius: 10px;
+        max-width: 650px;
+      }
+
+      #page-index h1 {
+        font-size: 3rem;
+        margin-bottom: 1rem;
+      }
+
+      #page-index p {
+        font-size: 1.5rem;
+        margin-bottom: 2rem;
+      }
+
+      #page-index .btn {
+        display: inline-block;
+        background-color: #4A90E2;
+        color: white;
+        padding: 10px 20px;
+        border-radius: 5px;
+        font-size: 1.2rem;
+        cursor: pointer;
+        text-decoration: none;
+        transition: background 0.3s;
+      }
+
+      #page-index .btn:hover {
+        background-color: #357ABD;
+      }
+    </style>
+{% endblock %}
+
+{% block content %}
+  <div id="page-index">
+    <div class="container">
+      <h1>Apakah Gambar Anda Dibuat oleh AI?</h1>
+      <p>
+        Deteksi gambar yang dihasilkan AI, gambar sintetis, hasil manipulasi, dan deepfake.<br />
+      </p>
+      <a href="{{ url_for('upload_page') }}" class="btn">Get Started</a>
+    </div>
+  </div>
+{% endblock %}

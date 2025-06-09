@@ -1,0 +1,35 @@
+# Virtual Environment
+venv/
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+
+# File Database SQLite
+# Mengabaikan folder instance dan semua file .db di dalamnya.
+# Jika Anda ingin menyertakan database kosong (skema saja) untuk orang lain,
+# Anda mungkin perlu menyesuaikan ini atau tidak mengabaikannya.
+instance/
+*.db
+*.sqlite
+*.sqlite3
+
+# File yang diunggah pengguna
+# Folder ini akan dibuat secara dinamis oleh aplikasi.
+uploads/
+
+# File spesifik OS
+.DS_Store
+Thumbs.db
+
+# File IDE/Editor
+.idea/
+.vscode/
+*.swp
+*.swo
+
+# Log files
+*.log
+
+# File konfigurasi environment (jika ada dan berisi data sensitif)
+# .env

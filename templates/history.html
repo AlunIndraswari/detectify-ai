@@ -1,0 +1,37 @@
+{% extends "base.html" %}
+
+{% block styles %}
+<!-- Tidak ada style khusus untuk halaman ini -->
+{% endblock %}
+
+{% block content %}
+<div class="container mt-5">
+    <h1 class="mb-4">Riwayat Analisis Anda</h1>
+    {% if predictions %}
+        <div class="row">
+            {% for prediction in predictions %}
+                <div class="col-md-4 mb-4">
+                    <div class="card">
+                        <!-- REVISI: Menggunakan rute 'serve_image' dan path lengkap dari database -->
+                        <img src="{{ url_for('serve_image', filepath=prediction.image_path) }}" class="card-img-top" alt="Analyzed Image" style="height: 200px; object-fit: cover;">
+                        <div class="card-body">
+                            <h5 class="card-title">{{ prediction.predicted_label }}</h5>
+                            <p class="card-text">Keyakinan: <strong>{{ prediction.confidence }}%</strong></p>
+                            <p class="card-text"><small class="text-muted">Dianalisis pada: {{ prediction.upload_timestamp.strftime('%Y-%m-%d %H:%M') }}</small></p>
+                            <a href="{{ url_for('show_result', prediction_id=prediction.id) }}" class="btn btn-sm btn-outline-primary">Lihat Detail</a>
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+    {% else %}
+        <div class="alert alert-info">
+            Anda belum memiliki riwayat analisis. Coba <a href="{{ url_for('upload_page') }}">deteksi gambar</a> sekarang!
+        </div>
+    {% endif %}
+</div>
+{% endblock %}
+
+{% block scripts %}
+<!-- Tidak ada script khusus untuk halaman ini -->
+{% endblock %}

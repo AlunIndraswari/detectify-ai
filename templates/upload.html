@@ -1,0 +1,60 @@
+{% extends "base.html" %}
+
+{% block title %}Deteksi Gambar AI{% endblock %}
+
+{% block styles %}
+    <!-- REVISI: Memuat style.css secara eksplisit di sini -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    
+    <!-- Style tambahan bisa tetap di sini -->
+    <style>
+      #page-upload { min-height: calc(100vh - 65px); }
+      .url-input-container { margin-top: 20px; width: 100%; }
+      .url-input-container input { width: 100%; padding: 10px; border: 1px solid #ccc; border-radius: 8px; font-size: 0.9rem; }
+      .separator { display: flex; align-items: center; text-align: center; color: #999; margin: 20px 0; }
+      .separator::before, .separator::after { content: ''; flex: 1; border-bottom: 1px solid #ddd; }
+      .separator:not(:empty)::before { margin-right: .25em; }
+      .separator:not(:empty)::after { margin-left: .25em; }
+    </style>
+{% endblock %}
+
+{% block content %}
+<div id="page-upload">
+  <div class="main-container">
+    <div class="left-panel">
+      <h1>DETECTIFY AI?</h1>
+      <p id="typing-text"></p>
+    </div>
+    <div class="right-panel">
+      <div class="card" data-detect-url="{{ url_for('detect_image') }}">
+        <h2>Deteksi Sekarang</h2>
+        <div id="dropZone" class="upload-box">
+          <img id="preview" class="preview-image" alt="Pratinjau Gambar"/>
+          <p>Tarik dan jatuhkan gambar Anda di sini</p>
+          <p>atau</p>
+          <div class="buttons" style="margin-top: 5px; margin-bottom: 15px; gap: 0;">
+            <button type="button" onclick="document.getElementById('fileInput').click()">Browse Files</button>
+          </div>
+        </div>
+        <input type="file" id="fileInput" accept="image/*" style="display:none" />
+        <div class="buttons">
+          <button type="button" id="detectButton">Deteksi dari File</button>
+        </div>
+        <div class="separator">ATAU</div>
+        <div class="url-input-container">
+          <input type="text" id="imageUrlInput" placeholder="Masukkan URL gambar di sini...">
+        </div>
+        <div class="buttons" style="margin-top: 15px;">
+          <button type="button" id="detectFromUrlButton">Deteksi dari URL</button>
+        </div>
+        <div id="loadingIndicator" style="display:none; margin-top: 15px;">Mendeteksi...</div>
+        <div id="errorMessageContainer" style="margin-top: 15px;"></div>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}
+
+{% block scripts %}
+  <script src="{{ url_for('static', filename='js/upload.js') }}"></script>
+{% endblock %}
